@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="text-center">
+    <form #loginForm=ngForm (ngSubmit)='onSubmit()' class="form-signin">
+        <div class="alert alert-danger" [hidden]='!error'>
+            {{ error }}
+        </div>
+
+        <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+
+        <label for="inputEmail" class="sr-only">Correo</label>
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Correo"
+            [(ngModel)]="form.email" required autofocus>
+
+        <label for="inputPassword3" class="sr-only">Contraseña</label>
+        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Contraseña"
+            [(ngModel)]="form.password" required>
+
+        <div class="mb-3">
+            <a routerLink="/signup"> ¿Eres nuevo? Crea una cuenta </a>
+        </div>
+
+        <button type="submit" class="btn btn-xs btn-primary btn-block" [disabled]="!loginForm.valid">Iniciar
+            sesión</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2020 <i>luismigeek</i> Todos los derechos reservados</p>
+    </form>
+
+</div>
