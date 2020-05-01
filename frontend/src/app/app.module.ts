@@ -11,6 +11,12 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { RequestResetComponent } from './componentes/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './componentes/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { GestionarAuthService } from './services/gestionar-auth.service';
+import { GestionarTokenService } from './services/gestionar-token.service';
+import { GestionarLoginService } from './services/gestionar-login.service';
+import { BeforeLoginService } from './services/before-login.service';
+import { AfterLoginService } from './services/after-login.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +32,18 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SnotifyModule
   ],
-  providers: [],
+  providers: [
+    GestionarAuthService,
+    GestionarTokenService,
+    GestionarLoginService,
+    BeforeLoginService,
+    AfterLoginService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

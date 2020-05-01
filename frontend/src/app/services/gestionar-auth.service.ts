@@ -18,4 +18,8 @@ export class GestionarAuthService {
     return this.http.post(`${this.baseUrl}/login`, data);
   }
 
+  public sendPasswordResetLink(data) {
+    return this.http.post(`${this.baseUrl}/sendPasswordResetLink`, data);
+  }
+
 }

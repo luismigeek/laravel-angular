@@ -1,1 +1,23 @@
-<p>request-reset works!</p>
+<div class="text-center">
+    <form #resetPasswordForm=ngForm (ngSubmit)='onSubmit()' class="form-signin">
+
+        <h1 class="h3 mb-3 font-weight-normal">Recuperar contraseña</h1>
+
+        <label for="inputEmail" class="sr-only">Correo</label>
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Correo"
+            [(ngModel)]="form.email" required autofocus>
+
+        <div class="alert alert-danger alert-dismissible fade show" [hidden]='!error'>
+            {{ error }}
+        </div>
+
+        <button type="submit" class="btn btn-xs btn-primary btn-block mt-4" [disabled]="!resetPasswordForm.valid">Enviar solicitud</button>
+
+        <div class="mt-3 mb-3">
+            <a routerLink="/signup"> ¿Eres nuevo? Crea una cuenta </a>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted">&copy; 2020 <i>luismigeek</i> Todos los derechos reservados</p>
+    </form>
+
+</div>
