@@ -2,7 +2,8 @@
     
     <a class="navbar-brand">Bienvenido</a>
     <div>
-        <a class="navbar-brand" routerLink="/login">Iniciar sesión</a>
-        <a class="navbar-brand" routerLink="/profile">Perfil</a>
+        <a class="navbar-brand" routerLink="/login" *ngIf="!loggedIn" >Iniciar sesión</a>
+        <a class="navbar-brand" href="#" (click)="logout($event)" *ngIf="loggedIn">Cerrar sesión</a>
+        <a class="navbar-brand" routerLink="/profile" *ngIf="loggedIn">Perfil</a>
     </div>    
   </nav>

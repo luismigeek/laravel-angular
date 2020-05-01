@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionarAuthService } from 'src/app/services/gestionar-auth.service';
 import { GestionarTokenService } from 'src/app/services/gestionar-token.service';
+import { Router } from '@angular/router';
+import { GestionarLoginService } from 'src/app/services/gestionar-login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +19,10 @@ export class LoginComponent implements OnInit {
   public error = null;
   
   constructor(
-    private service:GestionarAuthService,
-    private token: GestionarTokenService
+    private tokenService: GestionarTokenService,
+    private authService: GestionarAuthService,
+    private loginService: GestionarLoginService,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -26,14 +30,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.error = null;
-    return this.service.login(this.form).subscribe(
+    return this.authService.login(this.form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)     
     );
   }
 
   handleResponse(data){
-    this.token.handle(data.access_token);
+    this.tokenService.handle(data.access_token);
+    this.loginService.cambiarAuthStatus(true);
+    this.router.navigateByUrl('/profile');
   }
 
   handleError(error){

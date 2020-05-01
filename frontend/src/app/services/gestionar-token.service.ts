@@ -13,9 +13,7 @@ export class GestionarTokenService {
   constructor() { }
 
   handle(token){
-    this.set(token);
-    console.log(this.isValid());
-    
+    this.set(token);    
   }
  
   set(token) {
