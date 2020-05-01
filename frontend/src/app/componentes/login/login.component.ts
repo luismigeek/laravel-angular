@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { GestionarAuthService } from 'src/app/services/gestionar-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,16 +15,15 @@ export class LoginComponent implements OnInit {
 
   public error = null;
   
-  constructor(private http:HttpClient) {
+  constructor(private service:GestionarAuthService) {
   }
 
   ngOnInit(): void {
-
   }
 
   onSubmit(){
-
-    return this.http.post('http://localhost:8000/api/login', this.form).subscribe(
+    this.error = null;
+    return this.service.login(this.form).subscribe(
       data => console.log(data),
       error => this.handleError(error)     
     );

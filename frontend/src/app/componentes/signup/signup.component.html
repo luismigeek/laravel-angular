@@ -7,7 +7,7 @@
             <label for="inputName" class="sr-only">Nombre</label>
             <input type="text" name="name" class="form-control" id="inputName" placeholder="Nombre"
                 [(ngModel)]="form.name" required autofocus>
-            <div class="alert alert-danger" [hidden]="!error['name']">
+            <div class="alert alert-danger alert-dismissible fade show" [hidden]="!error['name']">
                 {{ error['name'] }}
             </div>
         </div>
@@ -16,7 +16,7 @@
             <label for="inputEmail" class="sr-only">Correo</label>
             <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Correo"
                 [(ngModel)]="form.email" required>
-            <div class="alert alert-danger" [hidden]="!error['email']">
+            <div class="alert alert-danger alert-dismissible fade show" [hidden]="!error['email']">
                 {{ error['email'] }}
             </div>
         </div>
@@ -25,7 +25,7 @@
             <label for="inputPassword" class="sr-only">Contraseña</label>
             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Contraseña"
                 [(ngModel)]="form.password" required>
-            <div class="alert alert-danger" [hidden]="!error['password']">
+            <div class="alert alert-danger alert-dismissible fade show" [hidden]="!error['password']">
                 {{ error['password'] }}
             </div>
         </div>
