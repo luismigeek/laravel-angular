@@ -7,10 +7,6 @@
         <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Correo"
             [(ngModel)]="form.email" required autofocus>
 
-        <div class="alert alert-danger alert-dismissible fade show" [hidden]='!error'>
-            {{ error }}
-        </div>
-
         <button type="submit" class="btn btn-xs btn-primary btn-block mt-4" [disabled]="!resetPasswordForm.valid">Enviar solicitud</button>
 
         <div class="mt-3 mb-3">

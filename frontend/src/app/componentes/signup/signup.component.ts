@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GestionarAuthService } from 'src/app/services/gestionar-auth.service';
 import { GestionarTokenService } from 'src/app/services/gestionar-token.service';
 import { Router } from '@angular/router';
-import { GestionarLoginService } from 'src/app/services/gestionar-login.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-signup',
@@ -17,32 +17,54 @@ export class SignupComponent implements OnInit {
     password: null,
     password_confirmation : null
   }
-
-  public error = [];
   
   constructor(
     private authService: GestionarAuthService,
     private tokenService: GestionarTokenService,
-    private loginService: GestionarLoginService,
-    private router: Router
+    private router: Router,
+    private notify: SnotifyService
   ) {}
 
   onSubmit(){
-    this.error = [];
     return this.authService.signup(this.form).subscribe(
       data => this.handleResponse(data),
-      error => this.handleError(error)     
+      error => this.handleError(error.error.errors)     
     );
   }
 
   handleResponse(data){
-    this.tokenService.handle(data.access_token);
-    this.loginService.cambiarAuthStatus(true);
-    this.router.navigateByUrl('/profile');
+    let _router = this.router;
+    this.notify.confirm('¡Ahora ya tienes una cuenta!, ve a iniciar sesión', {
+      buttons: [
+        {
+          text: 'Listo', 
+          action: toster => {
+            _router.navigateByUrl('/login'),
+            this.notify.remove(toster.id)
+          }
+        }, 
+      ]
+    });    
+    this.clearForm();
   }
 
-  handleError(error){
-    this.error = error.error.errors;    
+  handleError(errors) {
+    console.log(errors);    
+    for (let key in errors) {
+      this.notify.error(errors[key],{
+        timeout: 10000,
+        showProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    }
+  }
+
+  clearForm() {
+    this.form.name=null;
+    this.form.email= null;
+    this.form.password= null;
+    this.form.password_confirmation = null;
   }
 
   ngOnInit(): void {

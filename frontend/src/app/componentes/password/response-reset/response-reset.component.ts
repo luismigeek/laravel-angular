@@ -42,14 +42,14 @@ export class ResponseResetComponent implements OnInit {
     let _router = this.router;
     this.notify.confirm('¡Tu contraseña ha sido restablecida!, ahora ve a iniciar sesión', {
       buttons: [
-        {text: 'Iniciar sesión', 
+        {text: 'Listo', 
         action: toster => { _router.navigateByUrl('/login'),
         this.notify.remove(toster.id)
         }
         }, 
       ]
     });    
-    this.cleanForm();
+    this.clearForm();
   }
 
   handleError(errors) {
@@ -63,7 +63,7 @@ export class ResponseResetComponent implements OnInit {
     }
   }
 
-  cleanForm(){
+  clearForm(){
     this.form.email = null;
     this.form.password = null;
     this.form.password_confirmation = null;

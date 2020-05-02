@@ -3,6 +3,7 @@ import { GestionarAuthService } from 'src/app/services/gestionar-auth.service';
 import { GestionarTokenService } from 'src/app/services/gestionar-token.service';
 import { Router } from '@angular/router';
 import { GestionarLoginService } from 'src/app/services/gestionar-login.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-login',
@@ -15,24 +16,22 @@ export class LoginComponent implements OnInit {
     email: null,
     password: null
   }
-
-  public error = null;
   
   constructor(
     private tokenService: GestionarTokenService,
     private authService: GestionarAuthService,
     private loginService: GestionarLoginService,
-    private router: Router
+    private router: Router,
+    private notify: SnotifyService
     ) {}
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    this.error = null;
     return this.authService.login(this.form).subscribe(
       data => this.handleResponse(data),
-      error => this.handleError(error)     
+      error => this.handleError(error.error.errors)     
     );
   }
 
@@ -42,7 +41,16 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/profile');
   }
 
-  handleError(error){
-    this.error = error.error.error;    
+  handleError(errors) {
+    console.log(errors);    
+    for (let key in errors) {
+      this.notify.error(errors[key],{
+        timeout: 10000,
+        showProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    }
   }
+
 }

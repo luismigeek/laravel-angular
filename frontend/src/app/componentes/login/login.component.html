@@ -11,10 +11,6 @@
         <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Contraseña"
             [(ngModel)]="form.password" required>
 
-        <div class="alert alert-danger alert-dismissible fade show" [hidden]='!error'>
-            {{ error }}
-        </div>
-
         <button type="submit" class="btn btn-xs btn-primary btn-block mt-4" [disabled]="!loginForm.valid">Iniciar
         sesión</button>
 

@@ -13,8 +13,6 @@ export class RequestResetComponent implements OnInit {
     email: null,
   }
 
-  public error = null;
-
   constructor(
     private authService: GestionarAuthService,
     private notifyService: SnotifyService 
@@ -24,18 +22,19 @@ export class RequestResetComponent implements OnInit {
   }
 
   onSubmit(){
-    this.error = null;
+    this.notifyService.info('Enviando mensaje... Por favor espere', {timeout: 5000});
     return this.authService.sendPasswordResetLink(this.form).subscribe(
       data => this.handleResponse(data),
-      error => this.notifyService.error(error.error.error)
+      error => this.handleError(error.error.error)
     );
   }
 
   handleResponse(res){
-    this.notifyService.success(res.data);
+    this.notifyService.success(res.data, {timeout: 5000});
     this.form.email = null;
-    // this.tokenService.handle(data.access_token);
-    // this.loginService.cambiarAuthStatus(true);
-    // this.router.navigateByUrl('/profile');
+  }
+
+  handleError(error){
+    this.notifyService.error(error, {timeout: 5000});
   }
 }
