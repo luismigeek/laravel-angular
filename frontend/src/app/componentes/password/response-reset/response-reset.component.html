@@ -1,1 +1,29 @@
-<p>response-reset works!</p>
+<div class="text-center">
+    <form #changePasswordForm=ngForm (ngSubmit)='onSubmit()' class="form-signin">
+
+        <h1 class="h3 mb-3 font-weight-normal">Nueva contraseña</h1>
+
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">Correo</label>
+            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Correo"
+                [(ngModel)]="form.email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Contraseña</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Contraseña"
+                [(ngModel)]="form.password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="inputConfirm" class="sr-only">Confirmación</label>
+            <input type="password" name="password_confirmation " class="form-control" id="inputConfirm" placeholder="Confirmación"
+                [(ngModel)]="form.password_confirmation" required>
+        </div>
+
+        <button type="submit" class="btn btn-xs btn-primary btn-block mt-4" [disabled]="!changePasswordForm.valid">Cambiar contraseña</button>
+
+        <p class="mt-5 mb-3 text-muted">&copy; 2020 <i>luismigeek</i> Todos los derechos reservados</p>
+    </form>
+
+</div>

@@ -31,7 +31,8 @@ const routes: Routes = [
     canActivate: [BeforeLoginService]
   },
   {
-    path: 'profile', component: ProfileComponent,
+    path: 'profile', 
+    component: ProfileComponent,
     canActivate: [AfterLoginService]
   }
 ];

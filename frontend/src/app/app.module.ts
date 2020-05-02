@@ -11,12 +11,13 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { RequestResetComponent } from './componentes/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './componentes/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { GestionarAuthService } from './services/gestionar-auth.service';
 import { GestionarTokenService } from './services/gestionar-token.service';
 import { GestionarLoginService } from './services/gestionar-login.service';
 import { BeforeLoginService } from './services/before-login.service';
 import { AfterLoginService } from './services/after-login.service';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+
 
 @NgModule({
   declarations: [

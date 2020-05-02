@@ -24,8 +24,8 @@ class PasswordResetController extends Controller
 
     public function send($email)
     {
-        // $token = $this->createToken($email);
-        Mail::to($email)->send(new ResetPasswordMail);
+        $token = $this->createToken($email);
+        Mail::to($email)->send(new ResetPasswordMail($token));
     }
 
     public function createToken($email)
@@ -50,15 +50,9 @@ class PasswordResetController extends Controller
         ]);
     }
 
-
     public function validarCorreo($correo)
     {
         return !!User::where('email',$correo)->first();
-    }
-
-    public function validateEmail($email)
-    {
-        return !!User::where('email', $email)->first();
     }
 
     public function failedResponse()
